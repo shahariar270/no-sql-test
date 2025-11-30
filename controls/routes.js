@@ -38,5 +38,26 @@ router.get('/data/:id', async (req, res, next) => {
     }
 });
 
+router.patch('/data/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const updatedData = req.body
+
+        const updatedUser = await Data.findOneAndUpdate(
+            { id: Number(id) },
+            updatedData ,
+            { new: true }
+        );
+
+        res.status(200).json({
+            massage:'update data',
+            updatedData
+        })
+    } catch (error) {
+        next(error)
+    }
+
+})
+
 
 module.exports = router;
