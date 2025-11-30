@@ -51,7 +51,7 @@ router.patch('/data/:id', async (req, res, next) => {
 
         res.status(200).json({
             massage:'update data',
-            updatedData
+            updatedUser
         })
     } catch (error) {
         next(error)
