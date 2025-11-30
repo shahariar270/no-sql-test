@@ -45,18 +45,37 @@ router.patch('/data/:id', async (req, res, next) => {
 
         const updatedUser = await Data.findOneAndUpdate(
             { id: Number(id) },
-            updatedData ,
+            updatedData,
             { new: true }
         );
 
         res.status(200).json({
-            massage:'update data',
+            massage: 'update data',
             updatedUser
         })
     } catch (error) {
         next(error)
     }
 
+})
+
+router.delete('/data/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedUser = await Data.findOneAndDelete({ id: Number(id) });
+
+        if (!deletedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const data = await Data.find();
+        res.status(200).json({
+            massage: 'data deleted successfully',
+            data: data
+        })
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 
