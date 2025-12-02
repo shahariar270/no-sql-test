@@ -1,16 +1,9 @@
 const express = require('express');
+const path = require('path');
 const upload = express.Router();
 
 upload.get('/upload', (req, res) => {
-    const filePath = path.join(__dirname, 'pubilc', 'index.html');
-    console.log("Sending:", filePath); 
-    res.status(200).sendFile(filePath, (err) => {
-        if (err) {
-            console.error("SendFile Error:", err); 
-            res.status(err.status || 500).send("File not found!");
-        }
-    });
+    res.sendFile(path.join(__dirname, '..', 'pubilc', 'index.html'));
 });
-
 
 module.exports = upload;
