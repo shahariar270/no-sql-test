@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const { notFoundHandler, badRequestHandle } = require('./controls/errorHandler');
 const router = require('./controls/routes');
+const upload = require('./routes/fileUpload');
 const app = express();
 const port = process.env.PORT || 3000;
 dotenv.config();
@@ -14,10 +15,11 @@ app.use(cors());
 
 
 mongoose.connect(process.env.DB_URL)
-.then(()=> console.log('database connect successfully'))
-.catch((err)=>console.log(err))
+    .then(() => console.log('database connect successfully'))
+    .catch((err) => console.log(err))
 
 app.use('/api', router)
+app.use('/image', upload)
 
 app.get('/', (req, res) => {
     res.send('Request send successfully');
