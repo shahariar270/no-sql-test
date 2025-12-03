@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
-const fileUploadSchma = new mongoose({
+const fileUploadSchma = new mongoose.Schema({
     myImage:{
         type:String,
         required: true
